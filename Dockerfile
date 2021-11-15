@@ -2,6 +2,8 @@ FROM ubuntu
 ENV INSTALL_PATH /1point3acres
 ENV LOG_PATH /tmp/1point3acres.log
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt update \
     && apt install -y cron \
     && apt install -y python3 python3-pip tesseract-ocr=4.1.1-2build2 \
