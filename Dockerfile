@@ -19,6 +19,9 @@ RUN pip3 install -r ${INSTALL_PATH}/requirements.txt
 
 # Configure credentials
 COPY ./cookie.json ${INSTALL_PATH}/configure/cookie.json
+# COPY ./data.json ${INSTALL_PATH}/configure/data.json
 
+# crontab
 # CMD cron && tail -f ${LOG_PATH}
+# Single-run
 CMD cd ${INSTALL_PATH}/src && python3 ./service.py
