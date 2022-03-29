@@ -2,6 +2,8 @@ FROM ubuntu
 ENV INSTALL_PATH /1point3acres
 ENV LOG_PATH /tmp/1point3acres.log
 
+ARG ENV
+ENV ENV ${ENV}
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
@@ -21,7 +23,8 @@ RUN pip3 install -r ${INSTALL_PATH}/requirements.txt
 COPY ./cookie.json ${INSTALL_PATH}/configure/cookie.json
 # COPY ./data.json ${INSTALL_PATH}/configure/data.json
 
-# crontab
-# CMD cron && tail -f ${LOG_PATH}
-# Single-run
-CMD cd ${INSTALL_PATH}/src && python3 ./service.py
+# if ENV / ARG $ENV equals "DEV", then run one time; else 
+CMD if [ "${ENV}" = "DEV" ]; \
+    then cd ${INSTALL_PATH}/src && python3 ./service.py; \
+    else cron && tail -f ${LOG_PATH}; \
+    fi
