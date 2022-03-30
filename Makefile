@@ -1,6 +1,6 @@
 all: build
 
-build:
+build: submodule
 	docker build --tag 1point3acres:latest .
 
 run:
@@ -11,8 +11,11 @@ run_it:
 
 dev: dev_build dev_run
 
-dev_build:
+dev_build: submodule
 	docker build --build-arg ENV=DEV --tag 1point3acres:dev .
 
 dev_run: dev_build
 	docker run -it --rm 1point3acres:dev
+
+submodule:
+	git submodule update
