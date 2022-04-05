@@ -12,7 +12,7 @@ RUN apt update \
     && apt install -y cron \
     && apt install -y python3 python3-pip \
     # && pip3 install requests==2.22.0 lxml==4.6.3 cssselect==1.1.0 2captcha-python==1.0.3 \
-    && echo -e "15 8 * * *\t${CRON_USER}\tcd ${INSTALL_PATH}/src && python3 ./service.py 2>&1 1>${LOG_PATH}" >> /etc/crontab \
+    && echo "15 8\t* * *\t${CRON_USER}\tcd ${INSTALL_PATH}/src && python3 ./service.py 2>&1 1>${LOG_PATH}" >> /etc/crontab \
     && touch ${LOG_PATH}
 
 COPY ./1point3acres ${INSTALL_PATH}
